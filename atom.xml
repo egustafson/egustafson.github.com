@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Stuff I've Figured Out]]></title>
+  <link href="http://egustafson.github.com/atom.xml" rel="self"/>
+  <link href="http://egustafson.github.com/"/>
+  <updated>2011-12-19T19:46:19-07:00</updated>
+  <id>http://egustafson.github.com/</id>
+  <author>
+    <name><![CDATA[Eric Gustafson]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hello, World.]]></title>
+    <link href="http://egustafson.github.com/blog/2011/12/19/hello-world/"/>
+    <updated>2011-12-19T19:30:00-07:00</updated>
+    <id>http://egustafson.github.com/blog/2011/12/19/hello-world</id>
+    <content type="html"><![CDATA[<p>Obligatory first post:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Hello, World.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&#8217;ve chosen to follow the GitHub masses and publish this blog with
+Brandon Mathis&#8217; most excellent <a href="http://octopress.org">Octopress</a>.
+Next on the agenda is to port a number of my wiki notes and how-to&#8217;s
+to a more &#8230; revision controlled outlet: GitHub.</p>
+
+<p>Stay tuned - Eric</p>
+]]></content>
+  </entry>
+  
+</feed>

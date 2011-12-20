@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
+    <url>
+        <loc>http://egustafson.github.com/blog/2011/12/19/hello-world/</loc>
+        <lastmod>2011-12-19T19:45:40-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://egustafson.github.com/blog/archives/</loc>
+        <lastmod>2011-12-19T19:45:40-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://egustafson.github.com/</loc>
+        <lastmod>2011-12-19T19:45:40-07:00</lastmod>
+    </url>
+</urlset>
