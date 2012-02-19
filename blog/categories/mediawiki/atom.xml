@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: MediaWiki | Stuff I've Figured Out]]></title>
+  <link href="http://egustafson.github.com/blog/categories/mediawiki/atom.xml" rel="self"/>
+  <link href="http://egustafson.github.com/"/>
+  <updated>2012-02-18T18:51:46-07:00</updated>
+  <id>http://egustafson.github.com/</id>
+  <author>
+    <name><![CDATA[Eric Gustafson]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[MediaWiki with lighttpd and sqlite on Ubuntu]]></title>
+    <link href="http://egustafson.github.com/blog/2012/02/18/mediawiki-with-lighttpd-and-sqlite-on-ubuntu/"/>
+    <updated>2012-02-18T16:11:00-07:00</updated>
+    <id>http://egustafson.github.com/blog/2012/02/18/mediawiki-with-lighttpd-and-sqlite-on-ubuntu</id>
+    <content type="html"><![CDATA[<p>In rebuilding an old, and rarely used server that runs MediWiki I
+reconsidered how to install all of the dependencies that MediaWiki
+sits on top of.  My goal was to choose lightweight components.  The
+only thing that would run on this web server would be MediaWiki, and
+the wiki would be lightly used.  I concluded the following components
+were likely more suitable choices than the defaults MediaWiki and/or
+Ubuntu's package system used.</p>
+
+<ul>
+<li>lighttpd</li>
+<li>sqlite</li>
+</ul>
+
+
+<!-- more -->
+
+
+<p>The second goal was, based on my preference for Ubuntu as a
+distribution, build MediaWiki on top of Ubuntu using just Ubuntu
+packages, no source installation.  The principal value in this is that
+over time the components in use can be simply upgraded using the stock
+Ubuntu package mechansims (i.e. <code>apt-get upgrade</code>).</p>
+
+<p>The following is the sequence I used to install MediaWiki.  This
+installation guide is based on Ubuntu Oneiric (11.10).</p>
+
+<h2>Install Prerequsites</h2>
+
+<p>(note, <code>sudo</code> is generally required, but dropped from the commands below)
+<code>
+apt-get install lighttpd
+apt-get install php5-cgi php5
+</code>
+next, edit <code>/etc/php5/cgi/php.ini</code> to enable php5 in lighttpd and
+uncomment the line <code>cgi.fix_pathinfo=1</code></p>
+
+<p>Then enable the fastcgi configuration in lighttpd.
+<code>
+lighttpd-enable-mod fastcgi
+lighttpd-enable-mod fastcgi-php
+service lighttpd force-reload
+</code>
+install php5-sqlite
+<code>
+apt-get install php5-sqlite
+service lighttpd restart
+</code>
+Install optional extras that MediaWiki will take advantage of
+<code>
+apt-get install imagemagick php5-gd php5-cli
+service lighttpd restart
+</code></p>
+
+<h2>Install MediaWiki</h2>
+
+<p>Note:  The MediaWiki package in Ubuntu (Oneiric) has 'mysql-server'
+listed as a '<em>recommends</em>' dependency.  This has the implication that
+unless explicitly forced to <strong>not</strong> include the dependency, it will be
+included as part of the package install.  This is acomplished with the
+<code>--no-install-recommends</code>.</p>
+
+<p><code>
+apt-get --no-install-recommends install mediawiki
+apt-get install mediawiki-math
+</code></p>
+
+<h2>Configure MediaWiki</h2>
+
+<p>Add the following to lighttpd's configuration:
+<code>
+alias.url += ( "/wiki" =&gt; "/var/lib/mediawiki/" )
+</code>
+restart lighttpd to effect the configuration change:
+<code>
+service lighttpd restart
+</code>
+Create a data directory for MediaWik to store the sqlite database in:
+<code>
+mkdir /var/lib/mediawiki-data
+chown www-data.www-data /var/lib/mediawiki-data
+</code>
+Browse to the wiki root <em>http://hostname/wiki</em> and complete
+configuration through the web browser.</p>
+
+<p>Following browser configuration, copy the generated configuration to
+the permenant location, (as specified on the final browser page).
+<code>
+cp /var/lib/mediawiki/config/LocalSettings.php /etc/mediawiki/LocalSettings.php
+chown www-data /etc/mediawiki/LocalSettings.php
+chmod 600 /etc/mediawiki/LocalSettings.php
+rm -rf /var/lib/mediawiki/config
+</code>
+Done.</p>
+]]></content>
+  </entry>
+  
+</feed>
