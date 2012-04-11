@@ -4,7 +4,7 @@
   <title><![CDATA[Stuff I've Figured Out]]></title>
   <link href="http://egustafson.github.com/atom.xml" rel="self"/>
   <link href="http://egustafson.github.com/"/>
-  <updated>2012-02-18T18:51:46-07:00</updated>
+  <updated>2012-04-10T20:30:56-06:00</updated>
   <id>http://egustafson.github.com/</id>
   <author>
     <name><![CDATA[Eric Gustafson]]></name>
@@ -12,6 +12,100 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Simple collectd with Web Graphs]]></title>
+    <link href="http://egustafson.github.com/blog/2012/04/10/simple-collectd-with-web-graphs/"/>
+    <updated>2012-04-10T19:04:00-06:00</updated>
+    <id>http://egustafson.github.com/blog/2012/04/10/simple-collectd-with-web-graphs</id>
+    <content type="html"><![CDATA[<p>I want to collect machine metrics and I want to display them as a
+pretty set of graphs through a web browser.  Here&#8217;s how I do it:</p>
+
+<ol>
+<li>Install <a href="http://collectd.org">collectd</a> - this gathers the metrics.</li>
+<li>Install <a href="http://lighttpd.net">lighttpd</a> - my web server preference,
+also install php.</li>
+<li>Download and install
+<a href="http://pommi.nethuis.nl/category/cgp/">Collectd Graph Panel</a>, a PHP
+webapp.</li>
+</ol>
+
+
+<p>Thats it!</p>
+
+<h2>Installation</h2>
+
+<p>The following walk through will demonstrate the installation using
+Ubuntu Oneiric (11.10).  Note, the <code>sudo</code> is generally required, but
+dropped from the commands listed below:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>apt-get install collectd lighttpd php5-cgi php5</span></code></pre></td></tr></table></div></figure>
+
+
+<p>next, edit <code>/etc/php5/cgi/php.ini</code> to enable php5 in lighttpd and
+uncomment the line <code>cgi.fix_pathinfo=1</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lighttpd-enable-mod fastcgi
+</span><span class='line'>lighttpd-enable-mod fastcgi-php
+</span><span class='line'>service lighttpd force-reload</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now download and &#8217;<em>install</em>&#8217; Collectd Graph Panel(CGP).  CGP is
+downloaded with &#8217;<a href="http://git-scm.com">git</a>&#8217;, if you do not have git
+installed then <code>apt-get install git</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd /var/www
+</span><span class='line'>git clone http://git.nethuis.nl/pub/cgp.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Done.  Browse to <code>http://localhost/cgp/</code> to access the graphs.</p>
+
+<h2>Configuring what metrics collectd collects</h2>
+
+<p>The primary configuration file for <a href="http://collectd.org">collectd</a> is
+installed in <code>/etc/collectd/collectd.conf</code>, under Ubuntu.
+The configuration file is commented; refer to the collectd
+&#8217;<a href="http://collectd.org/documentation.shtml">Documentation</a>&#8217; page for
+more information.  For each plugin see the plugin pages listed along the side of the
+documentation page.  Many plugins do not require additional
+configuration; simply uncommenting them is a good starting point.</p>
+
+<p>After editing the collectd configuration, the service must be
+restarted with the typical service restart command, <code>service collectd
+restart</code>.</p>
+
+<p>Many of the plugins default to collecting all possible metrics covered
+by the plugin.  It is possible, via the plugin&#8217;s specific
+configuration, to prune out unwanted metrics.  A good example of this
+is the &#8216;interfaces&#8217; plugin which includes statistics on the loopback
+interface by default.</p>
+
+<h2>Customizing Collectd Graph Panel</h2>
+
+<p>The <a href="http://pommi.nethuis.nl/category/cgp/">Collectd Graph Panel(CGP)</a>
+website does not provide any configuration documentation, however it
+is not difficult to customize CGP.  If installed, as show above, CGP&#8217;s
+configuration file will be <code>/var/www/cgp/conf/config.php</code>.  This file
+is commented with details for changing the configuration.</p>
+
+<h2>Adding additional hosts</h2>
+
+<p>Nothing is required of CGP to add additional hosts.  Simply install
+&#8216;collectd&#8217; on the additional machines and configure the
+<a href="http://collectd.org/wiki/index.php/Plugin:Network">network plugin</a> on
+both the client and server.  In most cases, the commented out
+configuration, which uses multicast, will suffice for configuring the
+network plugin.</p>
+
+<p>Now sit back, and enjoy the pretty graphs of your running servers.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MediaWiki with lighttpd and sqlite on Ubuntu]]></title>
