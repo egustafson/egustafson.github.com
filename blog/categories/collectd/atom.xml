@@ -4,7 +4,7 @@
   <title><![CDATA[Category: collectd | Stuff I've Figured Out]]></title>
   <link href="http://egustafson.github.com/blog/categories/collectd/atom.xml" rel="self"/>
   <link href="http://egustafson.github.com/"/>
-  <updated>2012-04-10T20:30:56-06:00</updated>
+  <updated>2012-04-10T20:35:52-06:00</updated>
   <id>http://egustafson.github.com/</id>
   <author>
     <name><![CDATA[Eric Gustafson]]></name>
@@ -31,7 +31,10 @@ webapp.</li>
 </ol>
 
 
-<p>Thats it!</p>
+<p>Thats the short version!</p>
+
+<!-- more -->
+
 
 <h2>Installation</h2>
 
