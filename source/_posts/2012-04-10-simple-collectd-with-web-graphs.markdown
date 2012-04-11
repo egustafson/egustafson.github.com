@@ -15,7 +15,9 @@ pretty set of graphs through a web browser.  Here's how I do it:
    [Collectd Graph Panel](http://pommi.nethuis.nl/category/cgp/), a PHP
    webapp. 
 
-Thats it!
+Thats the short version!
+
+<!-- more -->
 
 ## Installation
 
